@@ -8,7 +8,7 @@ while length:
     if not name:
         print("Invalid name, try again..")
         name = input("Students name: ")
-    students["name"] = name
+    students["Name"] = name
     grade = input("Students garde: ")
     while not grade.isnumeric():
         print("Please enter the number")
@@ -33,4 +33,5 @@ while length:
 
 
 for el in listOfStudents:
-    print(el)
+    a = str(el).replace("'", "").replace("{", "").replace("',", "").replace("}", "")
+    print(a)
