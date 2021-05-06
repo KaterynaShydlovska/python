@@ -1,0 +1,27 @@
+<style>
+.main{
+    width: 700px;
+    display:block;
+    margin: auto;
+}
+h1, p{
+    text-align: center;
+}
+.submit{
+    text-align: center;
+}
+.button{
+    margin-top: 10px;
+}
+
+</style>
+<div class="main">
+<h1>Welcome to the Great Number Game!</h1>
+<p>I'm thinking between of a number 1 and 100</p>
+<p>Take a guess!</p>
+<form action='/result' method='post' class="submit">
+<input type='text' name='guess' class="submit" required>
+<br>
+<input type='submit' value='Button' class="submit button">
+</form>
+</div>
