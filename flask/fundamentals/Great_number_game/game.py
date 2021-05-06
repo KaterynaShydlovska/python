@@ -10,8 +10,6 @@ def show_index():
         session['number'] = randomNum
         return render_template('index.html')
 
-
-
 @app.route('/result', methods=["post"])
 def show_guess():
     session['guess'] = int(request.form['guess'])
