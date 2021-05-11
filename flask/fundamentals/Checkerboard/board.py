@@ -16,6 +16,10 @@ def boardOnFour():
 def customBoard(x, y):
     return render_template('index.html', x =  int(x), y = int(y))  
 
+@app.route('/<x>/<y>/<color1>/<color2>')
+def customBoardColors(x, y, color1, color2):
+    return render_template('index.html', x =  int(x), y = int(y))  
+
 
 if __name__=="__main__":
     app.run(debug=True)
