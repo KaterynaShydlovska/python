@@ -1,0 +1,15 @@
+SELECT * FROM user.user_table;
+INSERT INTO user.user_table (first_name, last_name, email) 
+VALUES('Kate', 'Shydlovska', 'email@gmail.comuser_table');
+INSERT INTO user.user_table (first_name, last_name, email) 
+VALUES('Evan', 'Smith', 'evan@gmail.com');
+INSERT INTO user.user_table (first_name, last_name) 
+VALUES('Andrew', 'lee');
+SELECT * FROM user.user_table;
+SELECT email FROM user.user_table;
+SELECT * FROM user.user_table WHERE id= 4;
+UPDATE user.user_table SET last_name = 'Pancekes' WHERE id=3;
+SELECT * FROM user.user_table;
+DELETE FROM user.user_table WHERE id=2;
+SELECT * FROM user.user_table ORDER BY first_name ASC; 
+SELECT * FROM user.user_table ORDER BY first_name DESC;
