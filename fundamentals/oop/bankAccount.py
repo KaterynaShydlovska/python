@@ -1,7 +1,8 @@
 class BankAccount:
     def __init__(self): 
         self.int_rate = 1/100
-        self.balance = 1
+        self.balance = 0
+
 
     def deposit(self, amount):
         self.balance += amount
@@ -11,6 +12,8 @@ class BankAccount:
         if self.balance < amount:
             print("Insufficient funds: Charging a $5 fee" )
             self.balance -= (amount + 5)
+        else:
+            self.balance -= amount
         return self
 
     def display_account_info(self):
