@@ -5,17 +5,21 @@ class User:
         self.account_balance = 0
 
     def make_deposit(self, amount):	
-        self.account_balance += amount	
+        self.account_balance += amount
+        return self	
 
     def make_withdrawal(self, amount):	
-        self.account_balance -= amount	
+        self.account_balance -= amount
+        return self	
 
     def display_user_balance(self):
         print(self.name, self.account_balance)
+        return self	
         
     def transfer_money(self, other_user, amount):
         self.account_balance -= amount
         other_user.account_balance += amount
+        return self	
         
         
 
@@ -24,27 +28,11 @@ kate = User("Kate", "email")
 mrHulk = User("mrHulk", "email")
 andrii = User("Andrii", "email")
 
-kate.make_deposit(100)
-kate.make_deposit(100)
-kate.make_deposit(100)
-kate.make_withdrawal(50)
-kate.display_user_balance()
+kate.make_deposit(100).make_deposit(100).make_deposit(100).make_withdrawal(50).display_user_balance()
 
-mrHulk.make_deposit(10)
-mrHulk.make_deposit(35)
-mrHulk.make_withdrawal(5)
-mrHulk.make_withdrawal(7)
-mrHulk.display_user_balance()
+mrHulk.make_deposit(10).make_deposit(35).make_withdrawal(5).make_withdrawal(7).display_user_balance()
 
+andrii.make_deposit(350).make_withdrawal(50).make_withdrawal(10).make_withdrawal(100).display_user_balance()
 
-andrii.make_deposit(350)
-andrii.make_withdrawal(50)
-andrii.make_withdrawal(10)
-andrii.make_withdrawal(100)
-andrii.display_user_balance()
-
-
-kate.transfer_money(andrii,50)
-kate.display_user_balance()
-andrii.display_user_balance()
+kate.transfer_money(andrii,50).display_user_balance().display_user_balance()
     

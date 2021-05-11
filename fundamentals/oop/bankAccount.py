@@ -3,6 +3,7 @@ class BankAccount:
         self.int_rate = 1/100
         self.balance = 0
 
+
     def deposit(self, amount):
         self.balance += amount
         return self
