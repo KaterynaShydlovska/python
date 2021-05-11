@@ -1,0 +1,48 @@
+SELECT * FROM dojos_and_ninjas_schema.dojos;
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('kate');
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('mac');
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('hulk');
+
+DELETE FROM dojos_and_ninjas_schema.dojos WHERE id=1;
+DELETE FROM dojos_and_ninjas_schema.dojos WHERE id=2;
+DELETE FROM dojos_and_ninjas_schema.dojos WHERE id=3;
+
+SELECT * FROM dojos_and_ninjas_schema.dojos;
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('one');
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('two');
+INSERT INTO dojos_and_ninjas_schema.dojos (name)
+VALUES('tree');
+
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('kate', 'sh', 27, 4);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('andrii', 'gl', 30, 4);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('romeo', 'lee', 25, 4);
+
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('mac', 'boston', 1, 5);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('hulk', 'boston', 1, 5);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('goga', 'lizard', 0, 5);
+
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('maria', 'meza', 227, 6);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('brandon', 'luis', 26, 6);
+INSERT INTO dojos_and_ninjas_schema.ninjas (first_name, last_name, age, dojo_id)
+VALUES('lulu', 'smith', 30, 6);
+
+SELECT * FROM dojos_and_ninjas_schema.ninjas WHERE dojo_id = 4;
+SELECT * FROM dojos_and_ninjas_schema.ninjas WHERE dojo_id = 5;
+SELECT * FROM dojos_and_ninjas_schema.ninjas WHERE dojo_id = 6; 
+
+
+
+
