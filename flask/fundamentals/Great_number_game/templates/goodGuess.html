@@ -1,0 +1,39 @@
+<style>
+.box{
+    width:200px;
+    height: 200px;
+    color: white;
+    background-color: green;
+    display: block;
+    margin: auto;
+}
+.main{
+    width: 700px;
+    display:block;
+    margin: auto;
+}
+h1, h3, p{
+    text-align: center;
+}
+h3{
+    padding: 30px;
+}
+.submit{
+
+    text-align: center;
+}
+
+</style>
+<div class="main">
+<h1>Welcome to the Great Number Game!</h1>
+<p>I'm thinking between of a number 1 and 100</p>
+<p>Take a guess!</p>
+<div class="box">
+<h3>{{session['guess']}} was the number</h3>
+<form action='/tryAgain' method='post' class="submit">
+<input type='submit' value='Play again' class="submit">
+</form>
+</div>
+
+
+</div>

@@ -1,0 +1,32 @@
+h3 {
+    text-decoration: underline;
+}
+
+.box {
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin: auto;
+}
+
+p,
+h3 {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.context {
+    display: flex;
+    justify-content: center;
+    margin-right: 150px;
+}
+
+button {
+    margin-left: 250px;
+    margin-top: 0px;
+    width: 70px;
+    color: white;
+    background-color: rgb(111, 160, 206);
+    box-shadow: 3px 3px rgb(37, 36, 36);
+}

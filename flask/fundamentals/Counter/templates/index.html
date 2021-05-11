@@ -1,0 +1,14 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+<h1>Counter</h1>
+<h3>{{counter}}</h3>
+<div class="forms">
+<form action='/add' method='post'>
+ <input type='submit' name ='add' value='+2' class="red">
+ </form>
+<form action='/reset' method='post'>
+ <input type='submit' name ='reset' value='reset' class="green">
+ </form>
+ </div>
+</div>

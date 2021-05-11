@@ -1,0 +1,49 @@
+<style>
+.box{
+    width:200px;
+    height: 200px;
+    color: white;
+    background-color: red;
+    display: block;
+    margin: auto;
+}
+.main{
+    width: 700px;
+    display:block;
+    margin: auto;
+}
+h1, h2, p{
+    text-align: center;
+}
+h2{
+    padding: 60px;
+}
+.submit{
+    text-align: center;
+    margin-top: 10px;
+}
+.button{
+    margin-top: 10px;
+}
+
+</style>
+<div class="main">
+<h1>Welcome to the Great Number Game!</h1>
+<p>I'm thinking between of a number 1 and 100</p>
+<p>Take a guess!</p>
+
+<div class="box">
+{% if session['guess'] < session['number'] %}
+<h2>To low!</h2>
+
+{% else %}
+<h2>To Hight!</h2>
+{% endif %}
+
+</div>
+<form action='/result' method='post' class="submit" >
+<input type='text' name='guess' class="submit" required>
+<br>
+<input type='submit' value='Button' class="submit button">
+</form>
+</div>
