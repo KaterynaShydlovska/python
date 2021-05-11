@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='table.css') }}">
+
+<table>
+{% for i in range(3): %}
+<tr> 
+{{row[i]}}
+{% endfor %}
+</tr>
+
+{% for user in users: %}
+<tr>
+<td>{{user["first_name"]}}</td>
+<td>{{user['last_name']}}</td>
+<td>{{user['first_name'] +" " +user['last_name']}}</td>
+</tr>
+{% endfor %}
+</table>
