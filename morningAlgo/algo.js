@@ -115,14 +115,12 @@ function isPallindrome(str) {
     }
     return true;
 }
-
 console.log(isPallindrome("racecar"));
 console.log(isPallindrome("Dud"));
 console.log(isPallindrome("oho!"));
 
 
 // Given a String, return the longest pallindromic substring. Given "hello dada", return "dad". Given "not much" return "n". Include spaces as well!
-
 // Example 1: "my favorite racecar erupted" --> "e racecar e"
 // Example 2: "nada" --> "ada"
 // Example 3: "nothing to see" --> "ee"
