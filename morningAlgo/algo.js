@@ -157,3 +157,154 @@ function helper(str, i, j) {
 console.log(longestPallindrome("my favorite racecar erupted"));
 console.log(longestPallindrome("nada"));
 console.log(longestPallindrome("nothing to see"));
+
+// Given a dollar amount with change (an integer w/decimal) convert to change. Make sure to count the largest denomination first!
+
+// Example: 3.21 --> 12 quarters, 2 dimes, 1 penny
+
+function convertCoinChange(money) {
+    // declare variables for different denominations (quarter, dime, nickel, penny)
+    let q = 0 // each variable holds the count of each coin
+    let d = 0
+    let n = 0
+    let p = 0
+
+    money = money * 100
+    q = Math.floor(money / 25)
+    let rem = money - (q * 25)
+
+    while (rem > 10) {
+        rem -= 10;
+        d += 1
+    }
+
+    if (rem > 5) {
+        while (rem > 0) {
+            rem -= 5;
+            n += 1
+        }
+    }
+
+    if (rem > 0) {
+        while (rem > 0) {
+            rem -= 1;
+            p += 1;
+        }
+    }
+
+
+    console.log("quarters: " + q)
+    console.log("dimes: " + d)
+    console.log("nickel: " + n)
+    console.log("penny: " + p)
+}
+
+convertCoinChange(3.21)
+
+
+// Write a function that given a sorted array of page numbers, return a string representing a book index. Combine consecutive pages to create ranges.
+
+// Example: [1,3,4,5,6,7,8,10] --> "1, 3-8, 10"
+
+function bookIndex(arr) {
+    let str = ""
+    let i = 0;
+    let j = i + 1;
+
+    while (j < arr.length) {
+
+        if (arr[j] === arr[i] + 1) {
+            str += arr[i]
+            i++;
+            j++;
+        } else {
+            i++;
+            j++;
+        }
+    }
+    return str[0] + "-" + (parseInt(str[str.length - 1]) + 1)
+}
+
+console.log(bookIndex([1, 2, 3, 4, 5, 6, 7, 8, 12, 10]))
+
+
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+class SLList {
+    constructor() {
+        this.head = null
+    }
+
+    addToFront(value) {
+        var node = new Node(value);
+        // node.next = this.head;
+        // this.head = node;
+        // return this;
+        if (!this.head) {
+            this.head = node
+        } else {
+            node.next = this.head;
+            this.head = node;
+        }
+        return this
+    }
+
+    // given a value, add it to the back of your singly linked list
+    // what if the list is empty?
+    addToBack(value) {
+        if (!this.head) {
+            this.head = new Node(value)
+        }
+        let runner = this.head;
+        while (runner.next) {
+            runner = runner.next;
+        }
+        runner.next = new Node(value)
+        return this
+    }
+
+    // given a value, print whether the list contains that value
+    contains(value) {
+        if (!this.head) {
+            return null
+        }
+        let runner = this.head;
+        while (runner) {
+            if (runner.value === value) {
+                return true
+            }
+            runner = runner.next
+        }
+        return false;
+    }
+
+    // print the singly linked list
+    printValues() {
+        let runner = this.head
+        let list = ""
+        while (runner) {
+            list += runner.value + "->"
+            runner = runner.next
+        }
+        list += runner
+        return list
+    }
+
+
+}
+
+const sll = new SLList();
+console.log(sll.addToFront(3))
+console.log(sll.addToFront(2))
+sll.addToFront(1)
+sll.addToBack(4)
+console.log(sll.addToBack(5))
+console.log(sll.contains(5)) // prints true
+console.log(sll.contains(6)) // prints false
+console.log("==========================================")
+sll.printValues()
