@@ -283,6 +283,29 @@ class SLList {
         return false;
     }
 
+    // remove the first node in the list
+    removeFromFront() {
+        if (!this.head) {
+            return null
+        }
+        this.head = this.head.next
+    }
+
+    // remove the last node in the list
+    removeFromBack() {
+        if (!this.head) {
+            return null
+        }
+        if (!this.head.next) {
+            this.head === null
+        }
+        let r = this.head;
+        while (r.next.next) {
+            r = r.next
+        }
+        r.next = null
+    }
+
     // print the singly linked list
     printValues() {
         let runner = this.head
