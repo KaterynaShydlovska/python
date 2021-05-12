@@ -318,6 +318,87 @@ class SLList {
         return list
     }
 
+    moveMinToFront() {
+        if (!this.head) {
+            return "Empty list"
+        }
+        let min = this.head.value;
+        let run = this.head;
+
+        while (run) {
+            if (run.value < min) {
+                min = run.value
+            }
+            run = run.next
+        }
+        // let runTwo = this.head;
+        // let temp = this.head.value;
+        // while(runTwo){
+        //   if(runTwo.value === min){
+        //     this.head.value = min;
+        //     runTwo.value = temp;
+        //   }
+        //   runTwo = runTwo.next
+        // }
+        let minNode;
+        if (this.head.value === min) {
+            return this
+        }
+        let runTwo = this.head;
+        while (runTwo.next.value != min) {
+            runTwo = runTwo.next;
+        }
+        minNode = runTwo.next;
+        runTwo.next = runTwo.next.next
+
+
+        let temp = this.head
+        this.head = minNode;
+        this.head.next = temp
+
+        return this
+    }
+
+    moveMaxToBack() {
+        if (!this.head) {
+            return "Empty list"
+        }
+        let max = this.head.value;
+        let run = this.head;
+        let temp;
+        while (run.next) {
+            if (run.value > max) {
+                max = run.value
+            }
+            run = run.next
+        }
+
+        let maxNode;
+        if (max == this.head.value) {
+            maxNode = this.head;
+            this.head = this.head.next;
+        } else {
+            let runner = this.head;
+            while (runner.next.value != max) {
+                runner = runner.next;
+            }
+            maxNode = runner.next;
+            runner.next = runner.next.next
+        }
+
+        let final = this.head;
+        while (final.next) {
+            final = final.next;
+        }
+
+        final.next = maxNode;
+        maxNode.next = null;
+
+        return this
+
+
+    }
+
 
 }
 
