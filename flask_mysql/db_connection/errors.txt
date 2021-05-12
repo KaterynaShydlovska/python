@@ -1,0 +1,28 @@
+jinja2.exceptions.TemplateNotFound: index.html
+
+File "/Users/katerynashydlovska/Desktop/dojo/python/flask_mysql/db_connection/server.py", line 3, in <module>
+    from mysqlconnectio import connectToMySQL
+ModuleNotFoundError: No module named 'mysqlconnectio'
+
+pymysql.err.OperationalError: (1049, "Unknown database 'twitte'")
+
+NameError: name 'render_templat' is not defined
+
+ * Detected change in '/Users/katerynashydlovska/Desktop/dojo/python/flask_mysql/db_connection/server.py', reloading
+ * Restarting with stat
+  File "/Users/katerynashydlovska/Desktop/dojo/python/flask_mysql/db_connection/server.py", line 12
+    return render_template("index.html")
+    ^
+SyntaxError: 'return' outside function
+
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+
+NameError: name 'pymysql' is not defined
+
+Traceback (most recent call last):
+  File "/Users/katerynashydlovska/Desktop/dojo/python/flask_mysql/db_connection/server.py", line 3, in <module>
+    from mysqlconnection import connectToMySQL
+  File "/Users/katerynashydlovska/Desktop/dojo/python/flask_mysql/db_connection/mysqlconnection.py", line 41
+    # return MySQLConnection(db)
+                                ^
+IndentationError: expected an indented block

@@ -44,6 +44,7 @@ JOIN friendships ON friendships_schema.friendships.friend_id = friendships_schem
 LEFT JOIN users as user2 ON friendships_schema.users.id = friendships_schema.friendships.friend_id 
 
 
-SELECT * FROM users 
-JOIN friendship ON friendship_schema.friendship.user_id = friendship_schema.users.id
-LEFT JOIN users as user2 ON friendship_schema.users.id = friendship_schema.friendship.friend_id; 
+SELECT * FROM friendship;
+SELECT users.first_name as user_first, users.last_name as user_last, user2.first_name as user2_first, user2.last_name as user2_last FROM users 
+JOIN friendship ON friendship.user_id = users.id
+LEFT JOIN users as user2 ON friendship.friend_id = user2.id;
