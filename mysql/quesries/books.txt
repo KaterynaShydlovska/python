@@ -1,0 +1,78 @@
+SELECT * FROM books_schema.authors; 
+INSERT INTO books_schema.authors (name) 
+VALUES('Jane Austen');
+INSERT INTO books_schema.authors (name) 
+VALUES('Emily Dickinson');
+INSERT INTO books_schema.authors (name) 
+VALUES('Fyodor Dostoevsky');
+INSERT INTO books_schema.authors (name) 
+VALUES('William Shakespeare');
+INSERT INTO books_schema.authors (name) 
+VALUES('Lau Tzu');
+SELECT * FROM books_schema.authors;
+
+INSERT INTO books_schema.books (title) 
+VALUES('C Shar');
+INSERT INTO books_schema.books (title) 
+VALUES('Java');
+INSERT INTO books_schema.books (title) 
+VALUES('PHP');
+INSERT INTO books_schema.books (title) 
+VALUES('Python');
+INSERT INTO books_schema.books (title) 
+VALUES('Runy');
+SELECT * FROM books_schema.books;
+
+UPDATE books_schema.books SET title = 'C#' WHERE id= 1;
+SELECT * FROM books_schema.books;
+
+UPDATE books_schema.authors SET name = 'Bill' WHERE id= 4;
+SELECT * FROM books_schema.authors;
+
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(1, 1);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(2, 1);
+
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(1, 2);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(2, 2);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(3, 2);
+
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(1, 3);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(2, 3);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(3, 3);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(4, 3);
+
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(1, 4);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(2, 4);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(3, 4);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(4, 4);
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(5, 4);
+
+
+SELECT * FROM books_schema.favorites WHERE book_id=3;
+
+
+Query: Remove the first author of the 3rd book's favorites
+Doesn't make sense, because 1st author likes first 2 books, not third one, but if I miss something, queri I believe should look like this:
+DELETE FROM books_schema.favorites WHERE book_id =3 and author_id=1;
+
+INSERT INTO books_schema.favorites (book_id, author_id) 
+VALUES(2, 5);
+
+SELECT * FROM books_schema.favorites WHERE author_id=3;
+
+SELECT * FROM books_schema.favorites WHERE book_id=3;
+

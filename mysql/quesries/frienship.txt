@@ -1,0 +1,49 @@
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updates_at)
+VALUES('Amy', 'Giver', NOW(), NOW());
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updates_at)
+VALUES('Eli', 'Byers', NOW(), NOW());
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updates_at)
+VALUES('Marky', 'Mark', NOW(), NOW());
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updates_at)
+VALUES('Big', 'Bird', NOW(), NOW());
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updates_at)
+VALUES('Kermit', 'The Frog', NOW(), NOW());
+SELECT * FROM friendships_schema.users;
+
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(6, 7);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(6, 9);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(6, 10);
+
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(7, 6);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(7, 8);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(7, 10);
+
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(8, 9);
+
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(9, 6);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(9, 8);
+
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(10, 6);
+INSERT INTO friendships_schema.friendships (users_id, friend_id)
+VALUES(10, 7);
+
+SELECT * FROM friendships_schema.friendships;
+
+SELECT * FROM users 
+JOIN friendships ON friendships_schema.friendships.friend_id = friendships_schema.users.id
+LEFT JOIN users as user2 ON friendships_schema.users.id = friendships_schema.friendships.friend_id 
+
+
+SELECT * FROM users 
+JOIN friendship ON friendship_schema.friendship.user_id = friendship_schema.users.id
+LEFT JOIN users as user2 ON friendship_schema.users.id = friendship_schema.friendship.friend_id; 
