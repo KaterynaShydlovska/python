@@ -49,7 +49,7 @@ tr:nth-child(even) {
 <td>{{user['first_name'] +" " +user['last_name']}}</td>
 <td>{{user['email']}}</td>
 <td>{{user['created_at'].strftime("%B %d, %Y")}} </td>
-<td><a href='/show'>Show |</a> <a href='/update/{{user["id"]}}'>Edit |</a> <a href='/delete/{{user["id"]}}'>Delete</a></td>
+<td><a href='/show/{{user["id"]}}'>Show |</a> <a href='/update/{{user["id"]}}'>Edit |</a> <a href='/delete/{{user["id"]}}'>Delete</a></td>
 </tr>
 {% endfor %}
 </table>
