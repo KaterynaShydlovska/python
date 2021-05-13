@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add User</title>
+<style>
+.main{
+    width: 700px;
+    display: block;
+    margin: auto;
+    
+}
+.top-block{
+    display: flex;
+    justify-content: space-between;
+}
+.home{
+    margin-top: 30px;
+
+}
+.link{
+    margin-top: 30px;
+}
+p{
+    margin:5px;
+}
+.submit{
+    margin-top: 10px;
+    width:100px;
+    margin-right: 600px;
+}
+input{
+    width: 250px;
+}
+.context{
+    border: 1px solid black;
+}
+p{
+    padding: 5px;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div class='main'>
+<div class='top-block'>
+<h1>USER {{user["id"]}}</h1>
+<a class ="home" href='/'>Home</a>
+</div>
+<div class="context">
+<p>Full Name: {{user['first_name'] +" " +user['last_name']}}</p>
+<p>Email: {{user['email']}}</p>
+<p>Created On: {{user['created_at'].strftime("%B %d, %Y")}}</p>
+<p> Last Updated On: {{user['updated_at'].strftime("%B %d, %Y, %H:%M%p")}}</p>
+</div>
+
+<div class="link">
+<a href='/update/{{user["id"]}}'>Edit |</a> <a href='/delete/{{user["id"]}}'>Delete</a>
+</div>
+
+</div>
+</body>
+</html>
+

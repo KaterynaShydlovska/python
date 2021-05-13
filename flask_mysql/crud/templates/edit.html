@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add User</title>
+<style>
+.main{
+    width: 700px;
+    display: block;
+    margin: auto;
+    
+}
+.top-block{
+    display: flex;
+    justify-content: space-between;
+}
+a{
+    margin-top: 30px;
+}
+p{
+    margin:5px;
+}
+.submit{
+    margin-top: 10px;
+    width:100px;
+    margin-right: 600px;
+}
+input{
+    width: 250px;
+}
+.link{
+    margin-top:30px;
+}
+
+</style>
+</head>
+<body>
+<div class='main'>
+<div class='top-block'>
+<h1>Edit User {{user["id"]}}</h1>
+<a href='/'>Home</a>
+</div>
+<form action="/edit/{{user["id"]}}" method="POST">
+    <p>First Name:</p>
+<input type="text" name="fname" value="{{user['first_name']}}">
+    <p>Last Name: </p>
+<input type="text" name="lname" value="{{user['last_name']}}">
+    <p>Email: </p>
+<input type="text" name="email" value="{{user['email']}}">
+<br>
+    <input type="submit" value="Update" class='submit'>
+</form>
+<div class="link">
+<a href='/show/{{user["id"]}}'>Show</a>
+</div>
+
+</div>
+</body>
+</html>
