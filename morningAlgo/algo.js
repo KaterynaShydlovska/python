@@ -360,43 +360,93 @@ class SLList {
     }
 
     moveMaxToBack() {
+            if (!this.head) {
+                return "Empty list"
+            }
+            let max = this.head.value;
+            let run = this.head;
+            let temp;
+            while (run.next) {
+                if (run.value > max) {
+                    max = run.value
+                }
+                run = run.next
+            }
+
+            let maxNode;
+            if (max == this.head.value) {
+                maxNode = this.head;
+                this.head = this.head.next;
+            } else {
+                let runner = this.head;
+                while (runner.next.value != max) {
+                    runner = runner.next;
+                }
+                maxNode = runner.next;
+                runner.next = runner.next.next
+            }
+
+            let final = this.head;
+            while (final.next) {
+                final = final.next;
+            }
+
+            final.next = maxNode;
+            maxNode.next = null;
+
+            return this
+
+
+        }
+        // takes in a value and a location, add a node to the list with the input value BEFORE the given location
+    prependValue(value, location) {
         if (!this.head) {
-            return "Empty list"
+            return "Empty list!"
         }
-        let max = this.head.value;
-        let run = this.head;
-        let temp;
-        while (run.next) {
-            if (run.value > max) {
-                max = run.value
+        let prev = null;
+        let cur = this.head;
+        let count = 1;
+
+        let newNode = new Node(value)
+        while (cur && count <= location) {
+            if (count === location) {
+                prev.next = newNode;
+                newNode.next = cur;
             }
-            run = run.next
+            prev = cur
+            cur = cur.next
+            count++
         }
+        return this
+    }
 
-        let maxNode;
-        if (max == this.head.value) {
-            maxNode = this.head;
-            this.head = this.head.next;
-        } else {
-            let runner = this.head;
-            while (runner.next.value != max) {
-                runner = runner.next;
+    // takes in a value and a location, add a node to the list with the input value AFTER the given location
+    appendValue(value, location) {
+        if (!this.head) {
+            return "List is empty";
+        }
+        let cur = this.head;
+        let next = cur.next;
+        let newNode = new Node(value)
+        let count = 1
+        console.log(count)
+        while (next && count <= location) {
+            if (count === location) {
+                console.log(count)
+                cur.next = newNode;
+                newNode.next = next;
             }
-            maxNode = runner.next;
-            runner.next = runner.next.next
+            cur = next;
+            next = next.next
+            count++
+            console.log(count)
         }
-
-        let final = this.head;
-        while (final.next) {
-            final = final.next;
+        if (count === location) {
+            cur.next = newNode;
+            newNode.next = next;
         }
-
-        final.next = maxNode;
-        maxNode.next = null;
 
         return this
-
-
     }
 
 
