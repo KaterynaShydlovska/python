@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User</title>
+<style>
+.main{
+    width: 700px;
+    display: block;
+    margin: auto;
+    
+}
+table{
+    border: 1px solid black;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.link{
+    margin-top: 20px;
+}
+.h{
+    display:flex;
+
+}
+</style>
+</head>
+<body>
+<div class="h">
+<div class='main'>
+<h1>favorites</h1>
+<table>
+<tr>
+    <th>Titel</th>
+    <th>#of pages</th>
+</tr>
+{% for book in books: %}
+<tr>
+<td></td>
+<td></td>
+
+</tr>
+{% endfor %}
+</table>
+<div class="link">
+<a href="/authors" class="link">Home</a>
+</div>
+
+</div>
+
+
+<div class='main'>
+<h1>Add author favorites</h1>
+<form action="/addFavorites" method="POST">
+<div class="box">
+<label for="book">Book:</label>
+
+<select class="dojos" name="book_id">
+{% for b in books: %}
+<option value="{{b['title']}}" class="dojos">{{b['title']}}</option>
+{% endfor %}
+</select>
+
+</div>
+</div>
+
+</body>
+</html>
