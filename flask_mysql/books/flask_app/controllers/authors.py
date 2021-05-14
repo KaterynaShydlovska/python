@@ -37,8 +37,6 @@ def add_favBook(id):
 @app.route("/addFavoritesAuthor/<int:id>", methods=["POST"])
 def add_favBookAuthor(id):
     print(request.form)
-    res = Authors.addFavoriteAut(request.form)
-    print(res)
-    print("+++++++++++++++++++++")
+    Authors.addFavoriteAut(request.form)
     return redirect(f"/book_show/{id}")
 

@@ -27,8 +27,6 @@ def showFavorites(id):
         "id":id
     }
     favorites = Books.getFavorite_Books(data)
-    print(favorites)
-    print("favorites!!!!!!!!!!!!!!!!!!!")
     return render_template("show.html", books= books, favorites = favorites)
 
 

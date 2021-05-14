@@ -11,7 +11,7 @@ class Books:
     @classmethod
     def getAllBooks(cls):
         query = 'SELECT * FROM books;'
-        return connectToMySQL('books_schema').query_db(query, )
+        return connectToMySQL('books_schema').query_db(query)
 
     @classmethod
     def addBook(cls, data):
