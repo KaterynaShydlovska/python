@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style>
+.main{
+    display:flex;
+    justify-content: center;
+}
+.box{
+    width: 300px;
+    
+}
+.box1{
+    border: 1px solid black;
+}
+.name{
+    padding: 5px;
+}
+.ninja{
+    margin-top: 10px;
+}
+.submit{
+    margin-left: 50px;
+}
+.input{
+    width: 300px;
+    display: flex;
+}
+p{
+    margin-right: 10px;
+}
+input{
+    height: 20px;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<div class='main'>
+<div class='box'>
+<h1>New Dojo</h1>
+<form action="/create_friend" method="POST">
+<div class="input">
+    <p>Name:</p>
+<input type="text" name="first_name">
+</div>
+<br>
+    <input type="submit" value="Create" class='submit'>
+</form>
+</div>
+
+<div class='box'>
+<h1>All Dojos</h1>
+<div class='box1'>
+{% for d in dojo: %}
+<div class="name">
+<a href='/showNinjas/{{d['id']}}'>{{d['name']}}</a>
+</div>
+{% endfor %}
+</div>
+<div class="ninja">
+<a href='/addNinja'>Add Ninja</a>
+</div>
+</div>
+</div>
+</body>
+</html>

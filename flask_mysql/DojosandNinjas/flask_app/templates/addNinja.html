@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add User</title>
+<style>
+.main{
+    width: 700px;
+    display: block;
+    margin: auto;
+    
+}
+.top-block{
+    display: flex;
+    justify-content: space-between;
+}
+a{
+    margin-top: 30px;
+}
+p{
+    margin:5px;
+}
+.submit{
+    margin-top: 10px;
+    width:100px;
+    margin-right: 600px;
+}
+input{
+    width: 100px;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.dojos{
+    width: 100px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+.box{
+    display:flex;
+}
+.age{
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+
+
+</style>
+</head>
+<body>
+<div class='main'>
+<div class='top-block'>
+<h1>Add a New Ninja</h1>
+<a href='/dojo'>Home</a>
+</div>
+<form action="/create_ninja" method="POST">
+<div class="box">
+<label for="dojo">Dojo:</label>
+
+<select class="dojos" name="dojo_id">
+{% for d in dojos: %}
+<option value="{{d['id']}}" class="dojos">{{d['name']}}</option>
+{% endfor %}
+</select>
+</div>
+<div class="box">
+    <p>Last Name: </p>
+<input type="text" name="first_name" class="input">
+</div>
+<div class="box">
+    <p>Last Name: </p>
+<input type="text" name="last_name" class="input">
+</div>
+<div class="box">
+    <p>Age: </p>
+<input type="text" name="age" class="age">
+</div>
+    <input type="submit" value="Create" class='submit'>
+</form>
+
+</div>
+</body>
+</html>
