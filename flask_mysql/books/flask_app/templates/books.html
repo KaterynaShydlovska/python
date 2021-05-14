@@ -9,6 +9,8 @@
 }
 .box{
     width: 300px;
+    margin-right: 20px;
+  
     
 }
 .box1{
@@ -20,9 +22,7 @@
 .book{
     margin-top: 10px;
 }
-.submit{
-    margin-left: 50px;
-}
+
 .input{
     width: 300px;
     display: flex;
@@ -34,41 +34,46 @@ input{
     height: 20px;
     margin-top: 10px;
 }
+.title{
+    margin-left: 30px;
+}
+
+.home{
+    margin-left: 160px;
+}
+
 </style>
 </head>
 <body>
 <div class='main'>
-<div class='box'>
-<h1>New Books</h1>
-<form action="/addBook" method="POST">
-<div class="input">
-    <p>Title</p>
-<input type="text" name="title">
-</div>
-<div class="input">
-    <p>Number of pages:</p>
-<input type="text" name="num_of_pages">
-</div>
-<br>
-    <input type="submit" value="Create" class='submit'>
-</form>
-</div>
+    <div class='box'>
+        <h1>New Books</h1>
+        <form action="/saveBook" method="POST">
+        <div class="input ">
+            <p>Title:</p>
+            <input type="text" name="title" class="input">
+        </div>
+        <div class="input">
+            <p>Number of pages:</p>
+            <input type="text" name="num_of_pages">
+        </div>
+            <input type="submit" value="Create" class='submit'>
+        </form>
+    </div>
 
-<div class='box'>
-<h1>All Books</h1>
-<div class='box1'>
-{% for b in books: %}
-<div class="name">
-<a href='/book_show/{{b['id']}}'>{{b['title']}}</a>
+    <div class='box'>
+        <h1>All Books</h1>
+        <div class='box1'>
+        {% for b in books: %}
+            <div class="name">
+            <a href='/book_show/{{b['id']}}'>{{b['title']}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
-{% endfor %}
-</div>
-<div class="book">
-<a href='/addBook'>Add Book</a>
-</div>
-<a href='/authors'>Home</a>
-</div>
-
-</div>
+    <div class="home">
+    <a href='/authors'>Home</a>
+    </div>
 </body>
 </html>

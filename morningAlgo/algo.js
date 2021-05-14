@@ -422,31 +422,80 @@ class SLList {
 
     // takes in a value and a location, add a node to the list with the input value AFTER the given location
     appendValue(value, location) {
-        if (!this.head) {
-            return "List is empty";
-        }
-        let cur = this.head;
-        let next = cur.next;
-        let newNode = new Node(value)
-        let count = 1
-        console.log(count)
-        while (next && count <= location) {
-            if (count === location) {
+            if (!this.head) {
+                return "List is empty";
+            }
+            let cur = this.head;
+            let next = cur.next;
+            let newNode = new Node(value)
+            let count = 1
+            console.log(count)
+            while (next && count <= location) {
+                if (count === location) {
+                    console.log(count)
+                    cur.next = newNode;
+                    newNode.next = next;
+                }
+                cur = next;
+                next = next.next
+                count++
                 console.log(count)
+            }
+            if (count === location) {
                 cur.next = newNode;
                 newNode.next = next;
             }
-            cur = next;
-            next = next.next
-            count++
-            console.log(count)
+
+            return this
         }
-        if (count === location) {
-            cur.next = newNode;
-            newNode.next = next;
+        // remove the second to last item in the list
+    removeSecondToLast() {
+        if (!this.head || !this.head.next) {
+            return "Nothimg to remove"
         }
 
+        let counter = 0;
+        let cur = this.head;
+        while (cur) {
+            cur = cur.next;
+            counter++
+        }
+        let run = this.head;
+        counter = counter - 2 - 1;
+        while (counter > 0) {
+            counter--
+            run = run.next
+        }
+        run.next = run.next.next;
         return this
+    }
+
+    // remove all nodes that have a negative value
+    removeNegatives() {
+        if (!this.head) {
+            return "Empty"
+        }
+        let cur = this.head;
+        let next = cur.next
+        while (this.head && this.head.value < 0) {
+            this.head = this.head.next;
+        }
+        while (next) {
+            if (next.value < 0) {
+                cur.next = next.next;
+                if (cur.next) {
+                    next = cur.next.next;
+                } else {
+                    next = null;
+                }
+            } else {
+                cur = next;
+                next = next.next;
+            }
+        }
+        if (cur.next.value < 0) {
+            this.removeFromBack()
+        }
     }
 
 

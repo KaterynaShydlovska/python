@@ -35,7 +35,7 @@ tr:nth-child(even) {
 <body>
 <div class="h">
 <div class='main'>
-<h1>Title:</h1>
+<h1>Title:{{book[0]['title']}}</h1>
 <p>Favorited by:</p>
 {% for aut in author: %}
 <p>{{aut['name']}}</p>
@@ -49,21 +49,21 @@ tr:nth-child(even) {
 
 <div class='main'>
 <h1>Add book's favorit</h1>
-<form action="/addFavorites" method="POST">
+<form action="/addFavoritesAuthor/{{book[0]['id']}}" method="POST">
 <div class="box">
 <label for="book">Author:</label>
 
-<select name="book_id">
-{% for a in author: %}
-<option value="{{a['name']}}" >{{a['name']}}</option>
+<select name="author_id">
+{% for a in authors: %}
+<option value="{{a['id']}}" >{{a['name']}}</option>
 {% endfor %}
 </select>
+<input type="hidden" name="book_id" value="{{book[0]['id']}}"/>
 </div>
 <br>
     <input type="submit" value="Add" class='submit'>
 </form>
 </div>
-</form>
 
 </div>
 </div>
