@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='show.css') }}">
+
+<div class="box">
+<h3>Submitted Info :</h3>
+<div class="context">
+<div>
+    <p>Name: </p>
+    <p>Dojo Location: </p>
+    <p>Favorite Language: </p>
+    <p>Comments: </p>
+</div>
+<div>
+    <p>{{ userInfo['name'] }}</p>
+    <p>{{userInfo['location']}}</p>
+    <p>{{userInfo['language']  }}</p>
+    <p>{{ userInfo['comment'] }}</p>
+    
+</div>
+</div>
+
+<button onClick="window.location='/'">Go Back</button>
+</div>
