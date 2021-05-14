@@ -59,7 +59,7 @@ input{
 <div class='box1'>
 {% for b in books: %}
 <div class="name">
-<a href='/show'>{{b['title']}}</a>
+<a href='/book_show/{{b['id']}}'>{{b['title']}}</a>
 </div>
 {% endfor %}
 </div>

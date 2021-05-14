@@ -17,7 +17,7 @@
 .name{
     padding: 5px;
 }
-.ninja{
+.book{
     margin-top: 10px;
 }
 .submit{
@@ -45,7 +45,6 @@ input{
     <p>Name:</p>
 <input type="text" name="name">
 </div>
-<br>
     <input type="submit" value="Create" class='submit'>
 </form>
 </div>
@@ -55,11 +54,11 @@ input{
 <div class='box1'>
 {% for a in authors: %}
 <div class="name">
-<a href='/show'>{{a['name']}}</a>
+<a href='/show/{{a['id']}}'>{{a['name']}}</a>
 </div>
 {% endfor %}
 </div>
-<div class="ninja">
+<div class="book">
 <a href='/addBook'>Add Book</a>
 </div>
 </div>

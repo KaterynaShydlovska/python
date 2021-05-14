@@ -7,12 +7,7 @@ class Books:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
-    # @classmethod
-    # def get_by_id(cls, data):
-    #     query = ('SELECT * FROM books WHERE dojo_id = %(dojo_id)s;')
-    #     results = connectToMySQL('books_schema').query_db(query, data)
-    #     return results;
-    
+
     @classmethod
     def addAuthor(cls, data):
         query = ' INSERT INTO authors (name) VALUES (%(name)s);'
@@ -22,3 +17,22 @@ class Books:
     def addBook(cls, data):
         query = ' INSERT INTO authors (name) VALUES (%(name)s);'
         return connectToMySQL('books_schema').query_db(query, data)
+
+    @classmethod
+    def getFavorite(cls, data):
+        query = ' SELECT authors.name, favorites.book_id, favorites.author_id, books.title, books.num_of_pages FROM authors JOIN favorites ON authors.id = favorites.author_id JOIN books ON books.id = favorites.author_id WHERE author_id = %(id)s;'
+        #something wrong with object id????
+        result = connectToMySQL('books_schema').query_db(query, data)
+        return result[0]
+
+    @classmethod
+    def getFavorite_by_Book(cls, data):
+        query = ' SELECT authors.name, favorites.book_id, favorites.author_id, books.title, books.num_of_pages FROM authors JOIN favorites ON authors.id = favorites.author_id JOIN books ON books.id = favorites.author_id WHERE book_id = %(id)s;'
+        #something wrong with object id???? Can't pass it
+        result = connectToMySQL('books_schema').query_db(query, data)
+        print(result)
+        print("------------------")
+        return result[0]
+        
+            
+
