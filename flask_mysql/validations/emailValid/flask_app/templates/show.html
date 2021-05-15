@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Email validation</title>
+<style>
+.main{
+    display: block;
+    margin: auto;
+    width: 500px;
+
+}
+h3{
+    border: 1px solid black;
+    color: black;
+    background-color: green;
+    padiing: 10px;
+}
+h1{
+    text-decoration: underline;
+}
+p{
+    margin-left: 20px;
+}
+</style>
+</head>
+<body>
+<div>
+<div class="main">
+    <h3>The email address  you entered {{userInfo['email']}} is a VALID email address. Thank you!</h3>
+
+    <h1>Email addresses Entered:</h1>
+    {%for e in allEmails%}
+    <p>{{e['email']}}</p>
+    {% endfor %}
+
+</div>
+</body>
+</html>

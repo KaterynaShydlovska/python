@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Email validation</title>
+<style>
+.message {
+    color: white;
+    border: 1px solid black;
+    background-color: red;
+    height: 30px;
+    text-align: center;
+    
+}
+.box{
+    display: block;
+    margin: auto;
+    width: 500px;
+    margin-bottom:0px;
+}
+.input{
+    margin-top: 80px;
+}
+.submit{
+    margin-top: 20px;
+    margin-left: 200px;
+}
+</style>
+
+</head>
+<body>
+   
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+   
+    <div class='box'>
+    <form action="/addEmail" method="POST">
+        <div class="input">
+        <span>Email Address:</span> 
+        <input type="text" name="email">
+        </div>
+        <input type="submit" value="Submit" class='submit'>
+    </form>
+    </div>
+</body>
+</html>
