@@ -2,6 +2,7 @@ from flask import render_template,redirect,request,session,flash
 from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import UserInfo
+from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -12,6 +13,14 @@ def index():
 @app.route("/addUser", methods =["POST"])
 def add(): 
     if not UserInfo.validate_userInfo(request.form):
+        return redirect('/')
+    
+    data ={
+        "email" : request.form['email']
+    }
+    user_in_db = UserInfo.get_by_email(data)
+    if user_in_db:
+        flash("Please add new email address, this email address already exist")
         return redirect('/')
 
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
@@ -24,18 +33,21 @@ def add():
     }
     user_id = UserInfo.save(data)
     session['user_id'] = user_id
-
-
+    flash("You've been succssesfully regirstres")
+    return redirect("/succsess")
  
-    return redirect(f"succsess/{user_id}")
 
-@app.route("/succsess/<int:id>")
-def show(id): 
+@app.route("/succsess")
+def show(): 
+    if "user_id" not in session:
+        flash("Please login or register!")
+        return redirect("/")
     data={
-        "id": id
+        "id": session['user_id']
     }
     user = UserInfo.getOne(data)
     return render_template("success.html", user = user )
+    
 
 @app.route("/login", methods =["POST"])
 def login(): 
@@ -48,16 +60,7 @@ def login():
         flash("Invalid Email/Password")
         return redirect('/')
     session['user_id'] = user_in_db.id
-
-    return redirect(f"succsessFullyLogedIn/{session['user_id']}")
-
-@app.route("/succsessFullyLogedIn/<int:id>")
-def LogedIn(id): 
-    data={
-        "id": id
-    }
-    user = UserInfo.getOne(data)
-    return render_template("succsessFullyLogedIn.html", user = user )
+    return redirect("/succsess")
 
 @app.route("/logout")
 def logout(): 
