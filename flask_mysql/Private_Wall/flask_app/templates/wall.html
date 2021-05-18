@@ -1,0 +1,131 @@
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+
+<style>
+.main{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.box1, .box2{
+    margin: 30px;
+    margin-top:0px;
+}
+.box1{
+    margin-right: 50px;
+}
+.box2{
+    margin-left: 50px;
+}
+.box3{
+    display: flex;
+}
+
+.header{
+    display:flex;
+    border-bottom: 3px solid black;
+    justify-content:space-between;
+
+}
+.small{
+    display:flex;
+    justify-content:space-between;
+
+}
+.user{
+    margin-righ: 20px;
+}
+.logout{
+    margin-top: 25px;
+    margin-left: 20px;
+
+}
+h3{
+    border-bottom: 1px solid black;
+
+}
+.input{
+    margin-top: 10px;
+}
+.message {
+    color: red;
+    text-align: center;
+    
+}
+#user_messages{
+    display:flex;
+    justify-content: center;
+}
+.button{
+    margin-top: 15px;
+    background-color: red;
+}
+p{
+    margin-right: 10px;
+}
+.content{
+    width: 200px;
+}
+
+
+</style>
+<div class="header">
+    <div>
+        <h2>CoddingDojo Wall</h2>
+    </div>
+    <div class="small">
+        <div>
+            <h2 class="user">Welcome, {{user['first_name']}} </h2> 
+        </div>
+        <div class="logout">
+            <a href='/logout' >LogOut</a>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="box1">
+    <h3>{{length}} Message(s) for You:</h3>
+    {% for message in messages %}
+        <form action="/delete" method="POST">
+            <div id="user_messages">
+            <div class="content">
+                <p>{{message['from_user']}} said: </p>
+                <p> "{{message['message']}} "</p>
+            </div>
+            <div>
+                <button class="button"> x </button>
+                <input type="hidden" name="id" value="{{message['id']}}"/>
+            </div>
+            </div>
+        </form>
+  
+     {% endfor%} 
+      
+    </div>
+     <div class="box2">
+        <h3>Send message:</h3>
+         {% for u in users %}
+        <form action="/send" method="POST">
+        <div class="input">
+        <input type="hidden" name="from_user" value="{{user['first_name']}}"/>
+       
+            <div class="input">
+                <span class="user_name">{{u["first_name"]}}</span> 
+                <input type="hidden" name="to_user_id" value="{{u['id']}}"/>
+                <input type="text" name="message" >
+                <input type="submit" value="Send" class='submit'>
+             </div>
+          
+         </div>
+        </form>  
+          {% endfor%} 
+    </div>
+</div>
