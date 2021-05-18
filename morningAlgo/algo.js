@@ -621,3 +621,46 @@ queue.enqueue(3)
 
 queue.removeMin()
 queue.printQ()
+
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+// a stack operates on the principal of "First In, Last Out" like waiting in line for something
+class SLStack {
+    constructor() {
+        this.top = null
+    }
+
+    // add a given value to your stack
+    push(value) {
+            if (!this.top) {
+                this.top = new Node(value)
+            } else {
+                let newNode = new Node(value)
+                newNode.next = this.top;
+                this.top = newNode
+            }
+        }
+        // remove and return the top value
+    pop() {
+        this.top = this.top.next
+    }
+
+    // return (don't remove) the top value of a stack
+    topValue() {
+        return this.top.value
+    }
+}
+
+let stack = new SLStack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+console.log(stack)
+stack.pop()
+console.log(stack)
+stack.topValue()
