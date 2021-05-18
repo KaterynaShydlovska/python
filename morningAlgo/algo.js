@@ -511,3 +511,113 @@ console.log(sll.contains(5)) // prints true
 console.log(sll.contains(6)) // prints false
 console.log("==========================================")
 sll.printValues()
+
+
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+// a queue operates on the principal of "First In, First Out" like waiting in line for something
+class SLQueue {
+    constructor() {
+        this.head = null
+        this.tail = null
+    }
+
+    // add a node with the given value to the queue
+    enqueue(value) {
+        let newNode = new Node(value)
+        if (!this.head) {
+            this.head = newNode
+            this.tail = newNode
+        } else {
+            this.tail.next = newNode;
+            this.tail = this.tail.next;
+        }
+        return this
+    }
+
+    // remove and return the front value from the queue
+    dequeue() {
+        if (!this.head) {
+            return "queue is empty, nothing to remove!!!"
+        } else {
+            let oldHead = this.head.value;
+            this.head = this.head.next;
+            return oldHead
+        }
+
+
+    }
+
+    //return true/false based on whether you find the given value in a queue
+    contains(value) {
+        if (!this.head) {
+            return "queue is empty!!!"
+        }
+        let runner = this.head;
+        while (runner) {
+            if (runner.value === value) {
+                return true;
+            }
+            runner = runner.next
+        }
+        return false;
+    }
+
+    // remove the minimum value in the queue (remember your edgecases and pointers!)
+    removeMin() {
+        if (!this.head) {
+            return "queue is empty, nothing to remove!!!"
+        } else {
+            let min = this.head.value;
+            let runner = this.head;
+            while (runner) {
+                // console.log(min)
+                if (runner.value < min) {
+                    min = runner.value;
+                }
+                runner = runner.next;
+            }
+            if (this.head.value === min) {
+                this.head = this.head.next;
+            } else {
+                let first = this.head;
+                let next = first.next
+                while (next.value !== min) {
+                    first = next;
+                    next = next.next;
+                }
+                first.next = next.next;
+                this.tail = next.next;
+            }
+
+        }
+        return this
+    }
+
+    printQ() {
+        let str = "";
+        let r = this.head;
+        while (r) {
+            str += " " + r.value + " "
+            r = r.next;
+        }
+        return str
+    }
+
+}
+
+const queue = new SLQueue();
+queue.enqueue(5)
+
+queue.enqueue(15)
+queue.enqueue(3)
+    // queue.contains(5)
+    // queue.dequeue()
+
+queue.removeMin()
+queue.printQ()
