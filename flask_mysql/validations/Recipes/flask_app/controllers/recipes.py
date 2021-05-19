@@ -17,7 +17,7 @@ def create():
         "user_id": session['user_id']
     }
     if not Recipes.validate_recipe(data):
-        redirect("/recipes")
+        return redirect("/createRecipe")
     res = Recipes.create(data)
     print(res)
     return redirect("/recipes")
@@ -53,7 +53,8 @@ def updateRecipe(id):
         "time": request.form['time']
         }
     if not Recipes.validate_recipe(data):
-        redirect("/recipes")
+        return redirect(f"/edit/{data['id']}")
+
     Recipes.updateRecipes(data)
     return redirect("/recipes")
 

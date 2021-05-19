@@ -24,6 +24,12 @@ a{
     display: flex;
     justify-content: space-between;
 }
+.box{
+    width: 300px;
+    display: block;
+    margin: auto;
+    color:red;
+}
 </style>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -69,7 +75,7 @@ a{
                         <p>Under 30 minutes ?</p> 
                     </div>
                         <div class="big">
-                        <input type="radio" id="male" name="time" value="Yes">
+                        <input checked type="radio" id="male" name="time" value="Yes">
                         <label for="male">Yes</label>
                         <input type="radio" id="female" name="time" value="No">
                         <label for="female">No</label>

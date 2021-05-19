@@ -26,9 +26,6 @@ class Recipes:
         if len(data['instructions']) < 3:
             flash("Instructions must be at least 5 characters long!")
             is_valid = False
-        if not data['time']:
-            flash("Instructions must be at least 5 characters long!")
-            is_valid = False
         return is_valid
 
     @classmethod
