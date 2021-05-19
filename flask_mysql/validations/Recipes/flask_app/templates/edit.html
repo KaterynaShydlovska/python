@@ -1,0 +1,22 @@
+
+
+<h1> Add new Recipe</h1>
+<form action="/update/{{recipe['id']}}" method="POST">
+        <div class="input">
+        <p>Name:</p> 
+        <input type="text" name="name" value={{recipe['name']}}>
+        <p>Description:</p> 
+        <textarea type="text" name="description" >{{recipe['description']}}</textarea>
+        <p>Instructions:</p> 
+        <textarea type="text" name="instructions" rows="4" cols="50" > {{recipe['instructions']}}</textarea>
+        <p>Under 30 minutes ?</p> 
+        <input type="radio" id="male" name="time" value="Yes">
+        <label for="male">Yes</label>
+        <input type="radio" id="female" name="time" value="No">
+        <label for="female">No</label>
+        </div>
+        <input type="submit" value="Update" class='submit'>
+    </form>
+
+    <a href="/recipes">Dashboard</a>
+    <a href="/logout">LogOut</a>

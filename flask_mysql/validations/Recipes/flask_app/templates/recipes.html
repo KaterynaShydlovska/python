@@ -1,0 +1,80 @@
+ <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.main{
+    display: flex;
+    justify-content: space-between;
+
+}
+.box2{
+    margin-top: 20px;
+    margin-right: 10px;
+}
+a{
+    margin-right: 10px;
+}
+form{
+    display: inline-block;
+}
+button:focus {
+    outline: none;
+}
+</style>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+<div class="main">
+    <div class="box1">
+        <h1>Welcome {{user['first_name']}}</h1>
+        <h3>This are your recipes</h3>
+
+        <table>
+        <tr>
+            <th>Name</th>
+            <th>Under 30 minutes?</th>
+            <th>Actions</th>
+        </tr>
+        {% for recipe in recipes: %}
+        <tr>
+        <td>{{recipe['name']}}</td>
+        <td>{{recipe['time']}}</td>
+        <td>
+        <a href="/showRecipe/{{recipe['id']}}"> View Instructions |</a> <a href="/edit/{{recipe['id']}}">| Edit</a> 
+        <form action="/delete" method="POST">
+        <button class="button"> Delete </button>
+        <input type="hidden" name="id" value="{{recipe['id']}}"/>
+        </form>
+        </td>
+
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div class="box2">
+        <a href="/createRecipe">Create</a>
+        <a href="/logout">LogOut</a>
+    </div>
+</div>
