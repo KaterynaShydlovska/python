@@ -608,6 +608,44 @@ class SLQueue {
         }
         return str
     }
+    interleaveQueue(queue) {
+        if (!this.head) {
+            return "Empty"
+        }
+        let len = 0;
+        let runner = this.head
+        while (runner) {
+            runner = runner.next;
+            len++;
+        }
+        let counter = len
+        let arr = []
+        let r = this.head;
+        while (r && counter != 0) {
+            arr.push(r.value)
+            r = r.next;
+            counter--
+        }
+
+        let mid = Math.ceil(len / 2)
+        let first = 0;
+        let second = mid
+        let node = this.head;
+        while (first <= mid && second < arr.length || node) {
+            if (second === arr.length && first < mid) {
+                node.value = arr[first]
+                break
+            }
+            node.value = arr[first]
+            node.next.value = arr[second];
+            node = node.next.next;
+            first++
+            second++
+        }
+        // console.log(this.head.value)
+        // console.log(this.tail.value)
+        return this
+    }
 
 }
 
