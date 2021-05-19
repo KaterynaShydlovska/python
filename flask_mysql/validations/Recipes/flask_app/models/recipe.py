@@ -15,10 +15,19 @@ class Recipes:
         self.updated_at = data['updated_at']
 
     @staticmethod
-    def validate_message(data):
+    def validate_recipe(data):
         is_valid = True 
+        if len(data['name']) < 3:
+            flash("Name must be at least 5 characters long!")
+            is_valid = False
         if len(data['description']) < 3:
-            flash("Message must be at least 5 characters long!")
+            flash("Description must be at least 5 characters long!")
+            is_valid = False                    
+        if len(data['instructions']) < 3:
+            flash("Instructions must be at least 5 characters long!")
+            is_valid = False
+        if not data['time']:
+            flash("Instructions must be at least 5 characters long!")
             is_valid = False
         return is_valid
 
@@ -44,8 +53,6 @@ class Recipes:
     def updateRecipes(cls, data):
         query = 'UPDATE recipe SET name=%(name)s, description=%(description)s, instructions=%(instructions)s, time=%(time)s WHERE id = %(id)s;'
         res = connectToMySQL('recipes').query_db(query, data)
-        print(res)
-        print("+++++++++++++++++")
         return res
 
         

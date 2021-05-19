@@ -1,22 +1,83 @@
+<style>
+
+.input{
+    width: 50%;
+    display: inline-block;
+}
+
+.small{
+    width: 30%;
+    display: inline-block;
+}
+.big{
+    width: 69%;
+    display: inline-block;
+}
+.links{
+    margin-top: 20px;
+}
+
+a{
+    margin-right: 10px;
+}
 
 
-<h1> Add new Recipe</h1>
-<form action="/update/{{recipe['id']}}" method="POST">
-        <div class="input">
-        <p>Name:</p> 
-        <input type="text" name="name" value={{recipe['name']}}>
-        <p>Description:</p> 
-        <textarea type="text" name="description" >{{recipe['description']}}</textarea>
-        <p>Instructions:</p> 
-        <textarea type="text" name="instructions" rows="4" cols="50" > {{recipe['instructions']}}</textarea>
-        <p>Under 30 minutes ?</p> 
-        <input type="radio" id="male" name="time" value="Yes">
-        <label for="male">Yes</label>
-        <input type="radio" id="female" name="time" value="No">
-        <label for="female">No</label>
-        </div>
-        <input type="submit" value="Update" class='submit'>
-    </form>
-
-    <a href="/recipes">Dashboard</a>
-    <a href="/logout">LogOut</a>
+</style>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<div class= "main">
+    <div>
+        <h1> Edit recipe</h1>
+        <form action="/update/{{recipe['id']}}" method="POST">
+                <div class="input">
+                    <div class="context">
+                        <div class="small">
+                            <p>Name:</p>
+                        </div> 
+                        <div class="big">
+                            <input type="text" name="name" value={{recipe['name']}}>
+                        </div>
+                    </div>
+                    <div class="context">
+                        <div class="small">
+                            <p>Description:</p> 
+                        </div>
+                        <div class="big">
+                            <textarea type="text" name="description" >{{recipe['description']}}</textarea>
+                        </div>
+                    </div>
+                    <div class="context">
+                        <div class="small">                
+                            <p>Instructions:</p> 
+                        </div>
+                        <div class="big">
+                            <textarea type="text" name="instructions" rows="4" cols="50" > {{recipe['instructions']}}</textarea>
+                        </div>
+                    </div>
+                    <div class="context">
+                        <div class="small"> 
+                        <p>Under 30 minutes ?</p> 
+                    </div>
+                        <div class="big">
+                        <input type="radio" id="male" name="time" value="Yes">
+                        <label for="male">Yes</label>
+                        <input type="radio" id="female" name="time" value="No">
+                        <label for="female">No</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Update" class='submit'>
+            </form>
+    </div>
+    <div class="links">
+        <a href="/recipes">Dashboard</a>
+        <a href="/logout">LogOut</a>
+    </div>
+</div>

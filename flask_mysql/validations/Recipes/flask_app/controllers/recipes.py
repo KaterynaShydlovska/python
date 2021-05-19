@@ -16,9 +16,8 @@ def create():
         "time": request.form['time'],
         "user_id": session['user_id']
     }
-    print(session['user_id'])
-    if not Recipes.validate_message(data):
-        redirect("/recipe")
+    if not Recipes.validate_recipe(data):
+        redirect("/recipes")
     res = Recipes.create(data)
     print(res)
     return redirect("/recipes")
@@ -26,7 +25,6 @@ def create():
 
 @app.route("/createRecipe")
 def addRecipe(): 
-
     return render_template("createRecipe.html")
 
 @app.route("/showRecipe/<int:id>")
@@ -54,17 +52,17 @@ def updateRecipe(id):
         "instructions": request.form['instructions'],
         "time": request.form['time']
         }
-    recipe= Recipes.updateRecipes(data)
-    # print(recipe)
-    # print("UPDATE!!!!!!!!!!!!!!!!!!!!")
+    if not Recipes.validate_recipe(data):
+        redirect("/recipes")
+    Recipes.updateRecipes(data)
     return redirect("/recipes")
 
 
 
-@app.route("/delete", methods=["POST"])
-def delete(): 
+@app.route("/delete/<int:id>")
+def delete(id): 
     data ={
-        "id": request.form['id']
+        "id": id
     }
     Recipes.deleteRecipe(data)
     return redirect("/recipes")
