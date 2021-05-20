@@ -10,8 +10,8 @@ class Recipes:
         self.description = data['description']
         self.instructions = data['instructions']
         self.time = data['time']
-        self.user_id = data['time']
-        self.created_at = data['user_id']
+        self.user_id = data['user_id']
+        self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
     @staticmethod
