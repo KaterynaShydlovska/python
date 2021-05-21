@@ -609,43 +609,105 @@ class SLQueue {
         return str
     }
     interleaveQueue(queue) {
-        if (!this.head) {
-            return "Empty"
-        }
-        let len = 0;
-        let runner = this.head
-        while (runner) {
-            runner = runner.next;
-            len++;
-        }
-        let counter = len
-        let arr = []
-        let r = this.head;
-        while (r && counter != 0) {
-            arr.push(r.value)
-            r = r.next;
-            counter--
-        }
-
-        let mid = Math.ceil(len / 2)
-        let first = 0;
-        let second = mid
-        let node = this.head;
-        while (first <= mid && second < arr.length || node) {
-            if (second === arr.length && first < mid) {
-                node.value = arr[first]
-                break
+            if (!this.head) {
+                return "Empty"
             }
-            node.value = arr[first]
-            node.next.value = arr[second];
-            node = node.next.next;
-            first++
-            second++
+            let len = 0;
+            let runner = this.head
+            while (runner) {
+                runner = runner.next;
+                len++;
+            }
+            let counter = len
+            let arr = []
+            let r = this.head;
+            while (r && counter != 0) {
+                arr.push(r.value)
+                r = r.next;
+                counter--
+            }
+
+            let mid = Math.ceil(len / 2)
+            let first = 0;
+            let second = mid
+            let node = this.head;
+            while (first <= mid && second < arr.length || node) {
+                if (second === arr.length && first < mid) {
+                    node.value = arr[first]
+                    break
+                }
+                node.value = arr[first]
+                node.next.value = arr[second];
+                node = node.next.next;
+                first++
+                second++
+            }
+            // console.log(this.head.value)
+            // console.log(this.tail.value)
+            return this
         }
-        // console.log(this.head.value)
-        // console.log(this.tail.value)
-        return this
+        // given a queue, determine whether or not the values therein are a pallindrome 
+        // Ex: 1 --> 2 --> 3 --> 2 --> 1 --> null
+        // any values that are in the same order going forwards as backwards is a pallindrome, doesn't need to just be letters
+    isPallindromeWithArr() {
+        let arr = []
+        let run = this.head;
+        while (run) {
+            arr.push(run.value)
+            run = run.next
+        }
+        let i = 0;
+        let j = arr.length - 1;
+        while (i < j) {
+            if (arr[i] != arr[j]) {
+                return false
+            }
+            i++;
+            j--;
+        }
+        return true;
     }
+
+    size() {
+        if (!this.head) {
+            return 0
+        }
+        let s = 0;
+        let r = this.head;
+        while (r) {
+            s++;
+            r = r.next;
+        }
+        return s;
+    }
+
+    isPallindrome() {
+        let arr = [];
+        let r = this.head;
+        let counter = Math.ceil(this.size() / 2)
+        while (counter) {
+            arr.push(r.value);
+            this.dequeue()
+            r = r.next;
+            counter--;
+
+        }
+        let node = this.head;
+        let j = 0;
+        while (node && j < arr.length) {
+            // console.log(arr[j], node.value)
+            if (arr[j] != node.value) {
+                return false;
+            }
+            j++;
+            node = node.next;
+        }
+        return true;
+
+
+
+    }
+
 
 }
 
@@ -692,6 +754,7 @@ class SLStack {
     topValue() {
         return this.top.value
     }
+
 }
 
 let stack = new SLStack()
