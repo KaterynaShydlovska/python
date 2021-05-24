@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ask Me</title>
+<style>
+h1, p{
+    color: #505050;
+}
+h1{
+    padding: 20px;
+}
+
+img{
+    border-radius: 50%;
+}
+.main{
+    display: block;
+    margin: auto;
+    background-color: 	#D3D3D3;
+    width: 60%;
+    height: 600px;
+    text-align: center;
+}
+.submit{
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.new_account{
+    margin-top: 20px;
+}
+.img{
+    margin-top:5px;
+    
+
+}
+.input-form{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+
+}
+.message{
+    margin-buttom: 20px;
+}
+.input-form img{
+    margin-right: 5px;
+
+}
+.message {
+    color: red;
+    text-align: center;
+    
+}
+
+</style>
+
+</head>
+    <body>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="main">
+        <div>    
+            <h1>AskMe</h1>
+        </div>
+        <div class="context">
+            <div>
+            <img src="/static/message.jpeg" alt="message" width="150" height="150" class="message">
+            </div>
+            <div class="login">
+                <form action="/login" method="POST">
+                    <div class="input">
+                        <div class="input-form">
+                            <img src="/static/user.png" alt="user" width="30" height="30" class="img">
+                            <input type="text" name="email" placeholder="email" required >
+                        </div>
+                        <div class="input-form">
+                            <img src="/static/locker.jpeg" alt="locker" width="30" height="30" class="img">
+                            <input type="text" name="password" placeholder="password" required>
+                        </div>
+                        
+                    </div>
+                    <input type="submit" value="Login" class='submit'>
+                </form>
+            </div>
+            <div class="new_account">
+            <a href="/home">NEW ACCOUNT</a>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+</html>

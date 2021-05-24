@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ask Me</title>
+<style>
+.message{
+    display: block;
+    width: 300px;
+    margin: auto;
+    color: green;
+}
+
+h1, h4{
+
+    margin-top: 20px;
+    color: #505050;
+}
+h3, p{
+    color: #505050;
+}
+.button{
+    margin-top: 30px;
+}
+.context{
+display: block;
+}
+.header{
+    display: flex;
+    justify-content: center;
+}
+.links{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.main{
+    display: block;
+    margin: auto;
+    background-color: #D3D3D3;
+    width: 60%;
+    height: 600px;
+    text-align: center;
+}
+.play{
+    border-radius: 50%;
+}
+</style>
+
+</head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="box" >
+                    <p class="message">{{message}}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <div class="main">
+        <div class="header">
+            <div>    
+                <h1>Hello {{user['first_name']}}, welcome to Ask Me.</h1>
+                <h4>You can ask question or just type it.To ask question push button, or just type it the text box below.</h4>
+            </div>
+            <div class="links">
+                <a href="/logout">LogOut</a>
+            </div>
+         </div>
+
+
+        <div class="context">
+            <div class="question">
+                <div class="button">    
+                    <img src="static/play.jpeg" alt="button play" width="50" height="50" class="play">
+                </div>
+                <form action="/question" method="POST">
+                <p>Type here:</p> 
+                <textarea type="text" name="crust" rows="2" cols="20" > </textarea> 
+            </form>
+            </div>
+            <div class="result">
+                <h3>Result: </h3>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+</html>

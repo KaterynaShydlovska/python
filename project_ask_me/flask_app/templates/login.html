@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ask Me</title>
+<style>
+.message {
+    color: red;
+    text-align: center;
+    
+}
+
+.submit{
+    margin-top: 20px;
+    margin-left: 50px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+
+}
+.main{
+    display: balock;
+    margin: auto;
+    width: 60%;
+    background-color: #D3D3D3;
+    height: 600px;
+}
+p, h2{
+    color: 505050;
+}
+
+.form{
+    display:flex;
+    justify-content: center;
+}
+
+</style>
+
+</head>
+<body>
+   
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+             <div class="box" >
+                <p class="message">{{message}}</p>
+                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+   <div class="main">
+        <div class='form'>
+            <div>
+                <h2>Register here</h2>
+                <form action="/addUser" method="POST">
+                    <div class="input">
+                        <p>First Name:</p> 
+                        <input type="text" name="first_name" required>
+                        <p>Last Name:</p> 
+                        <input type="text" name="last_name" required>
+                        <p>Email:</p> 
+                        <input type="text" name="email" required>
+                        <p>Password:</p> 
+                        <input type="text" name="password" required>
+                        <p>Confirm password:</p> 
+                        <input type="text" name="conf_password" required>
+                    </div>
+                    <input type="submit" value="SignUp" class='submit'>
+                </form>
+            </div>
+        </div>
+</div>
+</body>
+</html>
