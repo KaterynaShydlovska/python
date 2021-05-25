@@ -789,3 +789,51 @@ function recursiveFactorial(num) {
 }
 
 console.log(recursiveFactorial(2, 5))
+
+// Given a number, add the collective sum up to that number (using Fibonacci sequence)
+
+// F0    F1    F2    F3    F4    F5    F6    F7    F8    F9    F10    
+// 0      1     1      2     3     5    8    13    21    34    55    
+// map = {};
+// function recursiveFibonacci(num) {
+//   // console.log(num)
+// if (num === 0) {
+//     return 0;
+//   } else if (num === 1) {
+//     return 1;
+//   } else {
+//     let fibOne;
+//     if(map[num - 1 + ""]) {
+//       fibOne = map[num - 1 + ""];
+//     } else {
+//       fibOne = recursiveFibonacci(num - 1);
+//       map[num - 1 + ""] = fibOne;
+//       console.log(map);
+//     }
+//     let fibTwo
+//     if(map[num - 2 + ""]) {
+//       fibTwo = map[num - 2 + ""];
+//     } else {
+//       fibTwo = recursiveFibonacci(num - 2);
+//       map[num - 2 + ""] = fibTwo;
+//     }
+//     return fibOne + fibTwo;
+//   }
+// }
+
+// Given a number, add the collective sum up to that number (using Fibonacci sequence)
+
+// F0    F1    F2    F3    F4    F5    F6    F7    F8    F9    F10    
+// 0    1    1    2    3    5    8    13    21    34    55    
+
+function recursiveFibonacci(num) {
+    if (num === 0) {
+        return 0
+    } else if (num === 1) {
+        return 1
+    } else {
+        return recursiveFibonacci(num - 1) + recursiveFibonacci(num - 2)
+    }
+}
+
+console.log(recursiveFibonacci(10))
