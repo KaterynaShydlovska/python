@@ -44,6 +44,47 @@ display: block;
     border-radius: 50%;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
+<script type=text/javascript>
+
+    let audio_context;
+    let recorder;
+    window.onload = function() {
+        let element = document.getElementById("button");
+        try {
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+            window.URL = window.URL || window.webkitURL;
+            
+            audio_context = new AudioContext;
+            console.log('Audio context set up.');
+            console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+        } catch (e) {
+            alert('No web audio support in this browser!');
+        }
+        function startUserMedia(stream) {
+            var input = audio_context.createMediaStreamSource(stream);
+            console.log('Media stream created.');
+            recorder = new Recorder(input);
+            console.log('Recorder initialised.');
+        }
+            
+        navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+            console.log('No live audio input: ' + e);
+        });
+        element.addEventListener("mousedown", function() {
+            recorder.record();
+            });
+        
+        element.addEventListener('mouseup', function() {
+            recorder.stop();
+            recorder.exportWAV(function(blob) {
+                console.log(blob);
+            })
+            recorder.clear();
+        });
+    }
+</script>
 
 </head>
     <body>
@@ -70,12 +111,15 @@ display: block;
 
         <div class="context">
             <div class="question">
-                <div class="button">    
+                <div class="button" id='button'>    
                     <img src="static/play.jpeg" alt="button play" width="50" height="50" class="play">
                 </div>
                 <form action="/question" method="POST">
                 <p>Type here:</p> 
-                <textarea type="text" name="crust" rows="2" cols="20" > </textarea> 
+                <textarea type="text" name="question" rows="10" cols="40" ></textarea> 
+                <div>
+                <input type="submit" value="Ask..." class='submit'>
+                </div>
             </form>
             </div>
             <div class="result">

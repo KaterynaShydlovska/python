@@ -52,10 +52,7 @@ def show():
         "id": session['user_id']
     }
     user = UserInfo.getOne(data)
-    allquestions = Questions.getAllmessages(data)
-    # length = len(allquestions)
-    # print(length)
-    return render_template("questions.html", user = user , questions = allquestions)
+    return render_template("questions.html", user = user )
     
 
 @app.route("/login", methods =["POST"])

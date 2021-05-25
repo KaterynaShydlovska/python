@@ -4,32 +4,23 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import UserInfo
 from flask_app.models.question import Questions
 from flask import flash
+from urllib.request import urlopen
+import urllib
+import re
+import string
+import json
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
+appid = 'VQRJE8-8VJHJP3U95'
 
-
-# @app.route("/send", methods=["POST"])
-# def send(): 
-
-
-#     data ={
-#         "message" : request.form['message'],
-#         "to_user_id" : request.form['to_user_id'],
-#         "from_user": request.form['from_user']
-#     }
-#     if not Questions.validate_message(data):
-#         redirect("/wall")
-#     Questions.send(data)
-#     return redirect("/wall")
-
-# @app.route("/delete", methods=["POST"])
-# def delete(): 
-#     data ={
-#         "id": request.form['id']
-#     }
-#     m = Questions.deleteMessage(data)
-#     # print(m)
-#     # print("=================")
-#     return redirect("/wall")
-
-    
+@app.route("/question", methods=["POST"])
+def ask(): 
+    query = request.form['question']
+    print(query)
+    data = {"appid": appid, "i": query}
+    url = 'http://api.wolframalpha.com/v1/spoken?' + urllib.parse.urlencode(data)
+    data = urlopen(url)
+    tree = data.read().decode('utf-8')
+    tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
+    print(tree)
+    return redirect("/main")
