@@ -4,8 +4,16 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import UserInfo
 from flask_app.models.question import Questions
 from flask import flash
+from urllib.request import urlopen
+import urllib
+import re
+import string
+import json
 from flask_bcrypt import Bcrypt
+import pyttsx3
 bcrypt = Bcrypt(app)
+
+appid = 'VQRJE8-8VJHJP3U95'
 
 @app.route("/")
 def index(): 
@@ -52,7 +60,7 @@ def show():
         "id": session['user_id']
     }
     user = UserInfo.getOne(data)
-    return render_template("questions.html", user = user )
+    return render_template("questions.html", user = user , res = "")
     
 
 @app.route("/login", methods =["POST"])
@@ -66,9 +74,31 @@ def login():
         flash("Invalid Email/Password")
         return redirect('/')
     session['user_id'] = user_in_db.id
-
-
     return redirect("/main")
+
+@app.route("/question", methods=["POST"])
+def ask(): 
+    data={
+        "id": session['user_id']
+    }
+    user = UserInfo.getOne(data)
+    query = request.form['question']
+    print(query)
+    data = {"appid": appid, "i": query}
+    url = 'http://api.wolframalpha.com/v1/spoken?' + urllib.parse.urlencode(data)
+    data = urlopen(url)
+    tree = data.read().decode('utf-8')
+    tree = re.sub('[%s]' % re.escape(string.punctuation), '', tree)
+    engine = pyttsx3.init()
+    engine.say(tree)
+    engine.runAndWait()
+    return render_template("questions.html", user = user, res = tree)
+
+@app.route("/audio", methods=["POST"])
+def sendAudio():
+    print("============")
+    print(request)
+    print("============")
 
 @app.route("/logout")
 def logout(): 

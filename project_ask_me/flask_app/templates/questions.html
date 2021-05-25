@@ -44,46 +44,128 @@ display: block;
     border-radius: 50%;
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
-<script type=text/javascript>
 
-    let audio_context;
-    let recorder;
-    window.onload = function() {
-        let element = document.getElementById("button");
-        try {
-            window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-            window.URL = window.URL || window.webkitURL;
-            
-            audio_context = new AudioContext;
-            console.log('Audio context set up.');
-            console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
-        } catch (e) {
-            alert('No web audio support in this browser!');
-        }
-        function startUserMedia(stream) {
-            var input = audio_context.createMediaStreamSource(stream);
-            console.log('Media stream created.');
-            recorder = new Recorder(input);
-            console.log('Recorder initialised.');
-        }
-            
-        navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-            console.log('No live audio input: ' + e);
-        });
-        element.addEventListener("mousedown", function() {
-            recorder.record();
+<script type=text/javascript>
+var sampleRate = null;
+let recorder, gumStream;
+window.onload = function() {
+let recordButton = document.getElementById("button");
+recordButton.addEventListener("click", toggleRecording);
+let chunks = [];
+
+function toggleRecording() {
+    if (recorder && recorder.state == "recording") {
+        recorder.stop();
+        gumStream.getAudioTracks()[0].stop();
+    } else {
+        navigator.mediaDevices.getUserMedia({
+            audio: true
+        }).then(function(stream) {
+            gumStream = stream;
+            recorder = new MediaRecorder(stream);
+            recorder.ondataavailable = function(e) {
+                var url = URL.createObjectURL(e.data);
+                var preview = document.createElement('audio');
+                preview.controls = true;
+                preview.src = url;            
+                document.body.appendChild(preview);
+                chunks.push(e.data);
+                sendData(chunks);
+            };
+            recorder.start();
             });
-        
-        element.addEventListener('mouseup', function() {
-            recorder.stop();
-            recorder.exportWAV(function(blob) {
-                console.log(blob);
-            })
-            recorder.clear();
-        });
+        }
     }
+}
+
+function sendData(interleaved) {
+     var buf = new ArrayBuffer(44 + interleaved.length * 2);
+
+     let view = new DataView(buf);
+ 
+      writeUTFBytes(view, 0, 'RIFF');
+      view.setUint32(4, 44 + interleaved.length * 2, true);
+      writeUTFBytes(view, 8, 'WAVE');
+      writeUTFBytes(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 2, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 4, true);
+      view.setUint16(32, 4, true);
+      view.setUint16(34, 16, true);
+      writeUTFBytes(view, 36, 'data');
+      view.setUint32(40, interleaved.length * 2, true);
+      
+      var lng = interleaved.length;
+      var index = 44;
+      var volume = 1;
+      for (var i = 0; i < lng; i++){
+              view.setInt16(index, interleaved[i] * (0x7FFF * volume),
+    true);
+            index += 2;
+    }
+
+      
+    var blob = new Blob ( [ view ], { type : 'audio/wav' } );
+    var fd = new FormData();
+    fd.append('fname', 'audio.wav');
+    fd.append('data', blob);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/audio', true);
+    console.log(xhr);
+    xhr.responseType = 'blob';
+    console.log('begin to send');
+    xhr.onload = function(evt) {
+        if (xhr.status == 200){
+            console.log(xhr);
+            var blob = new Blob([xhr.response], {type: 'audio/wav'});
+            var objectUrl = URL.createObjectURL(blob);
+            audio.src = objectUrl;
+            audio.onload = function(evt) {
+            URL.revokeObjectUrl(objectUrl);
+            }
+    };
+    xhr.send(fd);
+}
+}
+
+function writeUTFBytes(view, offset, string){ 
+  var lng = string.length;
+  for (var i = 0; i < lng; i++){
+    view.setUint8(offset + i, string.charCodeAt(i));
+  }
+}
+
+function success(e){
+    audioContext = window.AudioContext || window.webkitAudioContext;
+    context = new audioContext();
+
+    sampleRate = context.sampleRate;
+
+    console.log('succcess');
+    
+    volume = context.createGain();
+
+    audioInput = context.createMediaStreamSource(e);
+
+    audioInput.connect(volume);
+
+    var bufferSize = 2048;
+    recorder = context.createScriptProcessor(bufferSize, 2, 2);
+
+    recorder.onaudioprocess = function(e){
+        if (!recording) return;
+        var left = e.inputBuffer.getChannelData (0);
+        var right = e.inputBuffer.getChannelData (1);
+        leftchannel.push (new Float32Array (left));
+        rightchannel.push (new Float32Array (right));
+        recordingLength += bufferSize;
+    }
+
+    volume.connect (recorder);
+    recorder.connect (context.destination); 
+}
 </script>
 
 </head>
@@ -124,6 +206,7 @@ display: block;
             </div>
             <div class="result">
                 <h3>Result: </h3>
+                <p>{{res}}</p>
             </div>
         </div>
     </div>
