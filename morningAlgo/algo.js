@@ -765,3 +765,27 @@ console.log(stack)
 stack.pop()
 console.log(stack)
 stack.topValue()
+
+
+function n(num) {
+    if (num === 1) {
+        return 1
+    }
+    return num + n(num - 1)
+}
+
+console.log(n(5))
+
+// Write a drecursive function that, given a number, returns the product of integers up to a given number
+// Ex: given 4 would return 1*2*3*4 == 24
+// Ex: given 2.5 would return 1*2 == 2 
+
+function recursiveFactorial(num) {
+    if (num === 1) {
+        return 1
+    }
+
+    return num * recursiveFactorial(num - 1)
+}
+
+console.log(recursiveFactorial(2, 5))
